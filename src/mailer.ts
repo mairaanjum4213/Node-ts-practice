@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-export const sendTestMail = async (email: string) => {
+export const sendTestMail = async (email: string,category:string,subCategory:string) => {
     //mail data
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -209,8 +209,8 @@ export const sendTestMail = async (email: string) => {
                       class="boxPadding"
                     >
                       <div style="padding-left: 10px; border-left: 4px solid #2468cd;">
-                        <p style="font-size: 12px; margin: 0; padding: 0; color:#515151;">FEDERAL</p>
-                        <p style="margin: 5px 0 0 0; padding: 0;">Canadian Senate</p>
+                        <p style="font-size: 12px; margin: 0; padding: 0; color:#515151;">${category}</p>
+                        <p style="margin: 5px 0 0 0; padding: 0;">${subCategory}</p>
                       </div>
                     </td>
                   </tr>

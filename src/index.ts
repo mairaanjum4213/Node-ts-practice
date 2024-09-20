@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.post('/send-mail', async (req: Request, res: Response) => {
   console.log('POST /send-mail hit');
-  const { email } = req.body;
+  const { email,category,subCategory } = req.body;
   console.log('Received email:', email);
 
   if (!email || typeof email !== 'string') {
@@ -21,7 +21,7 @@ app.post('/send-mail', async (req: Request, res: Response) => {
   }
 
   try {
-    await sendTestMail(email);
+    await sendTestMail(email,category,subCategory);
     res.status(200).json({ message: 'End-of-day Report Email sent successfully' });
   } catch (error) {
     console.error('Error sending mail:', error);
@@ -32,7 +32,7 @@ app.post('/send-mail', async (req: Request, res: Response) => {
 
 app.post('/send-mail-real', async (req: Request, res: Response) => {
   console.log('POST /send-mail hit');
-  const { email } = req.body;
+  const { email, category, subCategory} = req.body;
   console.log('Received email:', email);
 
   if (!email || typeof email !== 'string') {
@@ -40,7 +40,7 @@ app.post('/send-mail-real', async (req: Request, res: Response) => {
   }
 
   try {
-    await sendTestMail2(email);
+    await sendTestMail2(email,category,subCategory);
     res.status(200).json({ message: 'Real-time Alert Email  sent successfully' });
   } catch (error) {
     console.error('Error sending mail:', error);
