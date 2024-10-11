@@ -172,7 +172,7 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
                   <td style="padding-left:40px; padding-right:40px; padding-top:40px; padding-bottom:30px; line-height: 1.6" class="boxPadding">
                     <p style="margin: 0;">
                       <span>
-                        <img src="https://i.imgur.com/Ux7Kdku.jpg" width="40%" />
+                        <img src="https://lh3.googleusercontent.com/d/1mw-gab7rT5tW25w16kbWuo1GDcepZYZq" width="40%" />
                       </span>
                       <span
                         style="float: right; background-color: #2468cd; padding:6px 30px; border-radius: 20px;" 
