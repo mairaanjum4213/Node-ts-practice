@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-
+import {  DataItem, ContentItem } from './types';
 
 //creating transporter object
 const transporter = nodemailer.createTransport({
@@ -14,7 +14,24 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export const sendTestMail2 = async (recipient_emails: string[], category: string, subCategory: string, data: any[]) => {
+function highlightKeyword(content: string, keywordTitle: string): string {
+  if (typeof content !== 'string' || !content) {
+    console.warn(`Invalid content: ${content}`);
+    return '';
+  }
+  const regex = new RegExp(keywordTitle, 'gi'); 
+  return content.replace(
+    regex,
+    `<strong style='color: #2468cd; text-transform: uppercase;'>${keywordTitle}</strong>`
+  );
+}
+
+export const sendTestMail2 = async (
+  recipient_emails: string[],
+  category: string,
+  subCategory: string,
+  data: DataItem[]
+): Promise<void> => {
 
   let htmlString = `<!DOCTYPE html>
   <html lang="en">
@@ -202,7 +219,7 @@ export const sendTestMail2 = async (recipient_emails: string[], category: string
               </tr>`
 
 
-  data.forEach((item, index) => {
+  data.forEach((item: DataItem, index) => {
     let keywordTitle = item.keywordTitle;
 
     htmlString += `<tr>
@@ -243,10 +260,12 @@ export const sendTestMail2 = async (recipient_emails: string[], category: string
         </tr>
   `;
 
-    item.content.forEach((contentItem: any) => {
+    item.content.forEach((contentItem: ContentItem) => {
       let date = contentItem.date;
-      let htmlContent = contentItem.htmlContent;
+      let content = contentItem.content;
       let transcriptURL = contentItem.transcriptURL;
+      let modifiedContent = highlightKeyword(content, keywordTitle);
+
 
       htmlString += `
                     <tr>
@@ -265,7 +284,7 @@ export const sendTestMail2 = async (recipient_emails: string[], category: string
                         class="bodyPadding2"
                       >
                         <span style="color: #0c0c0c; font-weight: bold">${date}</span><br />
-                        ${htmlContent}
+                        ${modifiedContent}
                         <br />
                         <a href="${transcriptURL}" style='color: #2468cd; font-family: Arial, sans-serif; text-decoration: underline'><u>View full transcript</u></a>
                       </td>
