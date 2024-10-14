@@ -14,9 +14,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export const sendTestMail = async (recipient_emails: string[], category: string, subCategory: string, data: any[]) => {
-  //mail data
-
+export const sendTestMail2 = async (recipient_emails: string[], category: string, subCategory: string, data: any[]) => {
 
 
   let htmlString = `<!DOCTYPE html>
@@ -24,12 +22,26 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>End-of-day Report Email</title>
+    <title>Real-time Alert Email</title>
     <style>
       @media only screen and (max-width: 600px) {
-      
+        
+      .headerBlock{
+          display: block !important;
+          text-align: left;
+          margin-top: 10px;
+          float: left !important;
+      }
+
         .headerBlockPadding{
           padding:20px !important;
+        }
+
+
+        .headerBlock2{
+            margin-top: 0 !important;
+            float: left !important;
+
         }
 
         .boxPadding{
@@ -39,14 +51,15 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
             padding-bottom:30px !important;
         
         }
-        
+
         .boxPadding2{
             padding-right:20px !important;
             padding-left:20px !important;
             padding-top:30px !important;
+
         }
 
-         .boxPadding3{
+          .boxPadding3{
             padding-right:50px !important;
             padding-left:20px !important;
             padding-top:30px !important;
@@ -60,32 +73,12 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
             padding-top:30px !important;
         }
 
-
-        .buttonPadding{
-            padding: 3px 18px !important;
-        }
-
         .bodyPadding{
             padding: 0 30px !important;
         }
 
-
-        .bodyPadding2{
+         .bodyPadding2{
             padding: 15px 30px !important;
-        }
-
-        .headingPadding{
-          padding-left:30px !important;
-          padding-right:30px !important;
-          padding-top:0 !important;
-          padding-bottom: 0 !important;
-        }
-
-        .headingPadding2{
-          padding-left:30px !important;
-          padding-right:30px !important;
-          padding-top:10px !important;
-          padding-bottom: 0 !important;
         }
 
         .footerPadding{
@@ -94,46 +87,30 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
 
         .footerMargin{
           margin-top: 20px !important;
-          
+          padding-bottom: 40px !important;
         }
-      
+
         .footerLayout {
-          display: block !important;
-          
+          display: block;
        }
-       
-      
-       .buttonPadding{
-            padding: 1px 15px !important;
-        }
-            
-        table {
-      width: 100% !important; /* Make table full-width on small screens */
-        }
       }
 
-      @media only screen and (max-width: 350px) {
-        .buttonPadding{
-            padding: 2px 10px !important;
-        }
-      }
-    </style>
+  </style>
   </head>
   <body
-    style="font-family: Arial, sans-serif; margin: 0; padding: 0"
-  >
+    style="font-family: Arial, sans-serif; margin: 0; padding: 0">
     <table
-     width="100%" cellspacing="0" cellpadding="0" style="margin: 0 auto; padding: 20px 0;" align="center"
-    >
+      width="100%" cellspacing="0" cellpadding="0" style="margin: 0 auto; padding: 20px 0;" align="center">
       <tr>
         <td align="center">
           <table
             cellspacing="0"
             cellpadding="0"
             style="max-width: 650px; background-color: #ffffff; padding: 0; margin: 0 auto; border-collapse: collapse;"
-            align="center">
-  
-            <!-- Body -->
+            align="center"
+          >
+
+          <!-- Body -->
             <tr>
                <td style="padding-top:5px; padding-bottom:20px; padding-left:60px; padding-right:60px; font-size: 12px; line-height: 1.6;" class="headerPadding headerBlockPadding">
                 <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -149,7 +126,7 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
               </td>
             </tr>
             <tr>
-             <td style="padding:0 20px;">
+            <td style="padding:0 20px;">
               <table width="650px" cellspacing="0" cellpadding="0" style="background-color: #ececec;">
                 <tr>
                   <td style="padding-left:40px; padding-right:40px; padding-top:40px; padding-bottom:30px; line-height: 1.6;" class="boxPadding">
@@ -209,27 +186,27 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
                 </tr>
               </table>
             </td>
-            </tr>`
-
-
-  data.forEach((item, index) => {
+            </tr>
+`
+  data.forEach((item) => {
     let keywordTitle = item.keywordTitle;
 
     htmlString += `<tr>
-        <td
-          style="
-            padding-left: 60px;
-            padding-right: 60px;
-            padding-top: 20px;
-            line-height: 1.6;
-            font-size: 13px;
-            color: #515151;
-            display: block;
-            width: 90%;
-          "
-          class="headingPadding"
-        >
-          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <td
+      style="
+        padding-top: 20px;
+        padding-left: 60px;
+        padding-right: 60px;
+        padding-top: 20px;
+        line-height: 1.6;
+        font-size: 13px;
+        color: #515151;
+        display: block;
+        width: 90%;
+      "
+      class="bodyPadding2"
+    >
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr>
               <td style="padding-top: 20px;"> <!-- Adjust this padding for top spacing -->
                 <p style="color: #0c0c0c; font-size: 20px; font-weight: bold; margin: 0; font-family: Arial, sans-serif;"> <!-- Removed margin to avoid issues -->
@@ -249,9 +226,8 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
               </td>
             </tr>
           </table>
-        </td>
-      </tr>
-`;
+    </td>
+  </tr>`;
 
     item.content.forEach((contentItem: any) => {
       let date = contentItem.date;
@@ -259,88 +235,72 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
       let transcriptURL = contentItem.transcriptURL;
 
       htmlString += `
-                  <tr>
-                    <td
-                      style="
-                        padding-top: 15px;
-                        padding-bottom :10px;
-                        padding-left:60px;
-               padding-right:60px;
-                        line-height: 1.6;
-                        font-size: 13px;
-                        color: #515151;
-                        display: block;
-                        font-family: Arial, sans-serif;
-                      "
-                      class="bodyPadding2"
-                    >
-                      <span style="color: #0c0c0c; font-weight: bold">${date}</span><br />
-                      ${htmlContent}
-                      <br />
-                      <a href="${transcriptURL}" style='color: #2468cd; font-family: Arial, sans-serif; text-decoration: underline'><u>View full transcript</u></a>
-                    </td>
-                  </tr>`;
+      <tr>
+        <td
+          style="
+           padding-top: 15px;
+           padding-bottom:15px;
+           padding-left:60px;
+           padding-right:60px;
+            line-height: 1.6;
+            font-size: 13px;
+            color: #515151;
+            display: block;
+            font-family: Arial, sans-serif;
+          "
+          class="bodyPadding2"
+        >
+          <span style="color: #0c0c0c; font-weight: bold">${date}</span><br />
+          ${htmlContent}
+          <br />
+         <a href="${transcriptURL}" style='color: #2468cd; text-decoration: underline;font-family: Arial, sans-serif;'><u>View full transcript</u></a>
+        </td>
+      </tr>`;
     });
-
-    // Add an <hr> if it's not the last item
-    if (index < data.length - 1) {
-      htmlString += `
-                  <tr>
-                    <td
-                      style="
-                        padding-top:  15px;
-                        padding-left: 60px;
-                        padding-right: 60px;
-                      "
-                     class="headingPadding2"
-                    >
-                      <hr style="color: #515151" />
-                    </td>
-                  </tr>`;
-    }
   });
 
-  htmlString += `
-            <!-- Footer -->
-          <tr>
-            <td style="padding-left:20px; padding-right:20px; padding-top:20px;" > 
-              <table width="100%" cellspacing="0" cellpadding="0">
-                <tr style="background-color: #515151;">
-                  <!-- Logo Cell -->
-                  <td
-                    style="padding-left:40px; padding-right:80px; padding-top:40px; padding-bottom:40px;" 
-                    class="boxPadding4 footerLayout"
-                  >
-                    <span>
-                    <img src="https://i.imgur.com/p1jY32C.png" width="60%" />
-                    <br>
-                    <br>
-                   <a href="#" style="font-size: 12px; text-decoration: underline; color: #ffffff">
-                    <span style="color:#ffffff !important; font-family: Arial, sans-serif;">Change your alert settings</span>
-                  </a>
-                    </span>
-                  </td>
-
-                  <!-- Address Cell -->
-                  <td
-                    style="padding-left:80px; padding-right:20px; padding-top:40px; padding-bottom:40px; line-height: 1.6;"
-                    class="boxPadding3 footerLayout"
-                  >
-                      <span style="color:#ffffff; font-size: 12px; font-family: Arial, sans-serif; user-select: none; text-decoration: none;" >
-                        1 University Avenue
-                        <br>
-                        Toronto, Ontario, Canada
-                        <br>
-                        M5J 2P1
-                      </span>  
-                  
-                  </td>
-                </tr>
-              </table>
-            </td>
-        </tr>
-            <!--Copyright-->
+  htmlString += ` <!-- Footer -->
+            
             <tr>
+              <td style="padding-left:20px; padding-right:20px; padding-top:20px;">
+                <table width="100%" cellspacing="0" cellpadding="0">
+                  <tr style="background-color: #515151;">
+                    <!-- Logo Cell -->
+                    <td
+                      style="padding-left:40px; padding-right:80px; padding-top:40px; padding-bottom:40px;" 
+                      class="boxPadding4 footerLayout"
+                    >
+                      <span>
+                      <img src="https://i.imgur.com/p1jY32C.png" width="60%" />
+                      <br>
+                      <br>
+                       <a href="#" style="font-size: 12px; text-decoration: underline; color: #ffffff">
+                        <span style="color:#ffffff !important; font-family: Arial, sans-serif;">Change your alert settings</span>
+                      </a>
+                      </span>
+                    </td>
+
+                    <!-- Address Cell -->
+                    <td
+                      style="padding-left:80px; padding-right:20px; padding-top:40px; padding-bottom:40px; line-height: 1.6;"
+                      class="boxPadding3 footerLayout">
+                        <span style="color:#ffffff; user-select: none; text-decoration: none; font-size: 12px; font-family: Arial, sans-serif;" >
+                          1 University Avenue
+                          <br>
+                          Toronto, Ontario, Canada
+                          <br>
+                          M5J 2P1
+                        </span>  
+                    
+                    </td>
+                  </tr>
+                </table>
+              </td>
+        </tr>
+
+         
+            <!--Copyright-->
+             <tr>
               <td style="color: #515151; padding: 20px 60px; font-size: 12px; font-family: Arial, sans-serif;" class="headerBlockPadding">
                 &copy; 2024 PoliAlerts. All rights reserved.
               </td>
@@ -350,12 +310,14 @@ export const sendTestMail = async (recipient_emails: string[], category: string,
       </tr>
     </table>
   </body>
-</html>
-`
+</html>`
+
+
+  //mail data
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: recipient_emails,
-    subject: 'End-of-day Report Email',
+    subject: 'Real-time Alert Email',
     html: htmlString,
 
   };
