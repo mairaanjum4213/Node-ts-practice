@@ -27,7 +27,7 @@ function highlightKeyword(content: string, keywordTitle: string): string {
 }
 
 export const sendTestMail2 = async (
-  recipient_emails: string[],
+  recipientEmails: string[],
   category: string,
   subCategory: string,
   data: DataItem[]
@@ -366,7 +366,7 @@ export const sendTestMail2 = async (
   //mail data
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: recipient_emails,
+    to: recipientEmails,
     subject: 'Real-time Alert Email',
     html: htmlString,
 

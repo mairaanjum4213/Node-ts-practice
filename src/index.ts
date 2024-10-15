@@ -13,10 +13,10 @@ app.use(express.json());
 // POST: End-of-Day Report Email
 app.post('/send-mail', async (req: Request<{}, {}, EmailParams>, res: Response) => {
   console.log('POST /send-mail hit');
-  const { recipient_emails, category, subCategory, data } = req.body;
-  console.log('Received email:', recipient_emails);
+  const {  recipientEmails, category, subCategory, data } = req.body;
+  console.log('Received email:',  recipientEmails);
 
-  if (!Array.isArray(recipient_emails) || recipient_emails.length === 0) {
+  if (!Array.isArray( recipientEmails) ||  recipientEmails.length === 0) {
     return res.status(400).json({ error: 'Invalid email array' });
   }
 
@@ -25,7 +25,7 @@ app.post('/send-mail', async (req: Request<{}, {}, EmailParams>, res: Response) 
   }
 
   try {
-    await sendTestMail(recipient_emails, category, subCategory, data);
+    await sendTestMail( recipientEmails, category, subCategory, data);
     res.status(200).json({ message: 'End-of-day Report Email sent successfully' });
   } catch (error) {
     console.error('Error sending mail:', error);
@@ -36,10 +36,10 @@ app.post('/send-mail', async (req: Request<{}, {}, EmailParams>, res: Response) 
 // POST: Real-time Alert Email
 app.post('/send-mail-real', async (req: Request<{}, {}, EmailParams>, res: Response) => {
   console.log('POST /send-mail-real hit');
-  const { recipient_emails, category, subCategory, data } = req.body;
-  console.log('Received email:', recipient_emails);
+  const {  recipientEmails, category, subCategory, data } = req.body;
+  console.log('Received email:',  recipientEmails);
 
-  if (!Array.isArray(recipient_emails) || recipient_emails.length === 0) {
+  if (!Array.isArray( recipientEmails) ||  recipientEmails.length === 0) {
     return res.status(400).json({ error: 'Invalid email array' });
   }
 
@@ -48,7 +48,7 @@ app.post('/send-mail-real', async (req: Request<{}, {}, EmailParams>, res: Respo
   }
 
   try {
-    await sendTestMail2(recipient_emails, category, subCategory, data);
+    await sendTestMail2( recipientEmails, category, subCategory, data);
     res.status(200).json({ message: 'Real-time Alert Email sent successfully' });
   } catch (error) {
     console.error('Error sending mail:', error);

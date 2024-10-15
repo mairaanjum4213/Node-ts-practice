@@ -27,7 +27,7 @@ function highlightKeyword(content: string, keywordTitle: string): string {
 }
 
 export const sendTestMail = async (
-  recipient_emails: string[],
+  recipientEmails: string[],
   category: string,
   subCategory: string,
   data: DataItem[]
@@ -370,7 +370,7 @@ item.content.forEach((contentItem: ContentItem) => {
 `
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: recipient_emails,
+    to: recipientEmails,
     subject: 'End-of-day Report Email',
     html: htmlString,
 

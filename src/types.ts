@@ -10,7 +10,7 @@ export interface ContentItem {
   }
   
   export interface EmailParams {
-    recipient_emails: string[];
+    recipientEmails: string[];
     category: string;
     subCategory: string;
     data: DataItem[];
